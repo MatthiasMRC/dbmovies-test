@@ -1,5 +1,6 @@
 // Api class to call request
 import 'package:test_technique_flutter/models/movie_model.dart';
+import 'package:test_technique_flutter/providers/movie_provider.dart';
 import 'package:test_technique_flutter/services/api.dart';
 import 'package:dio/dio.dart';
 import 'package:test_technique_flutter/widgets/movie_card.dart';
@@ -46,6 +47,7 @@ class ApiService {
         MovieModel movie = MovieModel.fromJson(map);
         movies.add(movie);
       }
+
       return movies;
     } else {
       throw response;

@@ -25,9 +25,11 @@ class _MovieCardState extends State<MovieCard> {
     // Initialization of view width
     double width = MediaQuery.of(context).size.width;
     //Initialization of the watcher from provider package
-    var favouriteMovies = context.watch<MovieProvider>().favouriteMovies;
+    List<MovieModel> favouriteMovies =
+        context.watch<MovieProvider>().favouriteMovies;
 
     return Container(
+      key: ValueKey(widget.movieModel.id),
       height: 130.0,
       width: width,
       margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
@@ -63,15 +65,11 @@ class _MovieCardState extends State<MovieCard> {
                                     fontWeight: FontWeight.bold)),
                             IconButton(
                               padding: const EdgeInsets.all(0.0),
-                              icon: favouriteMovies.contains(widget.movieModel)
-                                  ? const Icon(
-                                      Icons.favorite,
-                                      color: Colors.redAccent,
-                                    )
-                                  : const Icon(
-                                      Icons.favorite_border,
-                                      color: Colors.redAccent,
-                                    ),
+                              icon: Icon(Icons.favorite,
+                                  color: favouriteMovies
+                                          .contains(widget.movieModel)
+                                      ? Colors.redAccent
+                                      : Colors.grey),
                               onPressed: () {
                                 if (!favouriteMovies
                                     .contains(widget.movieModel)) {

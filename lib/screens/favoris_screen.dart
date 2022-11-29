@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:test_technique_flutter/providers/movie_provider.dart';
+import 'package:test_technique_flutter/widgets/movie_card.dart';
 
 class FavorisScreen extends StatefulWidget {
   FavorisScreen({Key? key}) : super(key: key);
@@ -10,6 +13,18 @@ class FavorisScreen extends StatefulWidget {
 class _FavorisScreenState extends State<FavorisScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    //Initialization of the watcher from provider package
+    var favouriteMovies = context.watch<MovieProvider>().favouriteMovies;
+
+    return ListView.builder(
+      itemCount: favouriteMovies.length,
+      itemBuilder: (BuildContext context, int index) {
+        final currentMovie = favouriteMovies[index];
+        // Use a widget to display each movies
+        return MovieCard(
+          movieModel: currentMovie,
+        );
+      },
+    );
   }
 }

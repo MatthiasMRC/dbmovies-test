@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_technique_flutter/models/movie_model.dart';
 import 'package:test_technique_flutter/providers/movie_provider.dart';
 import 'package:test_technique_flutter/screens/favoris_screen.dart';
 import 'package:test_technique_flutter/screens/films_screen.dart';
+import 'package:test_technique_flutter/services/api_service.dart';
 
 void main() {
   runApp(ChangeNotifierProvider<MovieProvider>(
@@ -32,12 +34,33 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   // index selector
   int currentIndex = 0;
+//Declaration of movies list
+  List<MovieModel>? movies;
 
-// list of screens
-  final screens = <Widget>[FilmsScreen(), FavorisScreen()];
+// Function called at init state to get popular movies handle by api service
+  void getPopularMovies() {
+    ApiService()
+        .getPopularMovies()
+        .then((results) => setState(() => movies = results));
+  }
+
+// Initialization of movies list
+  @override
+  void initState() {
+    super.initState();
+    getPopularMovies();
+  }
 
   @override
   Widget build(BuildContext context) {
+    // list of screens
+    final screens = <Widget>[
+      FilmsScreen(
+        movies: movies,
+      ),
+      FavorisScreen()
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Movies DB - API"),
