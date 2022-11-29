@@ -27,8 +27,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // index selector
   int currentIndex = 0;
 
+// list of screens
   final screens = <Widget>[FilmsScreen(), FavorisScreen()];
 
   @override
