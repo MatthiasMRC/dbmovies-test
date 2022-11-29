@@ -38,7 +38,7 @@ class ApiService {
 
     if (response.statusCode == 200) {
       //Get all the data from results list
-      List<Map<String, dynamic>> results = response.data["results"];
+      List<dynamic> results = response.data["results"];
 
       //Add results to a Movie Model list
       List<MovieModel> movies = [];
