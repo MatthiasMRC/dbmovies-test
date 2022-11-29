@@ -59,7 +59,7 @@ class _MovieCardState extends State<MovieCard> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: const [
                             Text("2022-10-19",
-                                style: const TextStyle(
+                                style: TextStyle(
                                     color: Colors.grey,
                                     fontStyle: FontStyle.italic)),
                           ],
