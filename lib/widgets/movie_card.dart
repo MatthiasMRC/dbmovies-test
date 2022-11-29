@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:test_technique_flutter/models/movie_model.dart';
+import 'package:test_technique_flutter/providers/movie_provider.dart';
 
 class MovieCard extends StatefulWidget {
   MovieModel movieModel;
@@ -20,7 +22,11 @@ class _MovieCardState extends State<MovieCard> {
 
   @override
   Widget build(BuildContext context) {
+    // Initialization of view width
     double width = MediaQuery.of(context).size.width;
+    //Initialization of the watcher from provider package
+    var favouriteMovies = context.watch<MovieProvider>().favouriteMovies;
+
     return Container(
       height: 130.0,
       width: width,
@@ -57,11 +63,27 @@ class _MovieCardState extends State<MovieCard> {
                                     fontWeight: FontWeight.bold)),
                             IconButton(
                               padding: const EdgeInsets.all(0.0),
-                              icon: const Icon(
-                                Icons.favorite_border,
-                                color: Colors.redAccent,
-                              ),
-                              onPressed: () {},
+                              icon: favouriteMovies.contains(widget.movieModel)
+                                  ? const Icon(
+                                      Icons.favorite,
+                                      color: Colors.redAccent,
+                                    )
+                                  : const Icon(
+                                      Icons.favorite_border,
+                                      color: Colors.redAccent,
+                                    ),
+                              onPressed: () {
+                                if (!favouriteMovies
+                                    .contains(widget.movieModel)) {
+                                  context
+                                      .read<MovieProvider>()
+                                      .addToList(widget.movieModel);
+                                } else {
+                                  context
+                                      .read<MovieProvider>()
+                                      .removeToList(widget.movieModel);
+                                }
+                              },
                               constraints: const BoxConstraints(),
                             )
                           ],
