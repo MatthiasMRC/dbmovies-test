@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
+import 'package:test_technique_flutter/models/movie_model.dart';
 
 class MovieCard extends StatefulWidget {
-  MovieCard({Key? key}) : super(key: key);
+  MovieModel movieModel;
+  MovieCard({Key? key, required this.movieModel}) : super(key: key);
 
   @override
   State<MovieCard> createState() => _MovieCardState();
 }
 
 class _MovieCardState extends State<MovieCard> {
+  @override
+  void initState() {
+    super.initState();
+    initializeDateFormatting();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -23,13 +33,13 @@ class _MovieCardState extends State<MovieCard> {
         elevation: 3,
         child: Row(
           children: [
-            Container(
-              width: 80.0,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5),
-                    bottomLeft: Radius.circular(5)),
-                color: Colors.red,
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(5), bottomLeft: Radius.circular(5)),
+              child: Image.network(
+                widget.movieModel.posterUrl(),
+                fit: BoxFit.cover,
+                width: 90.0,
               ),
             ),
             Expanded(
@@ -42,8 +52,9 @@ class _MovieCardState extends State<MovieCard> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text("Black Adam",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            Text(widget.movieModel.title,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold)),
                             IconButton(
                               padding: const EdgeInsets.all(0.0),
                               icon: const Icon(
@@ -57,9 +68,12 @@ class _MovieCardState extends State<MovieCard> {
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text("2022-10-19",
-                                style: TextStyle(
+                          children: [
+                            //String manipulation to display data to french date
+                            Text(
+                                DateFormat.yMMMM("fr").format(DateTime.parse(
+                                    widget.movieModel.release_date)),
+                                style: const TextStyle(
                                     color: Colors.grey,
                                     fontStyle: FontStyle.italic)),
                           ],
@@ -69,10 +83,12 @@ class _MovieCardState extends State<MovieCard> {
                     Expanded(
                         child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
+                      children: [
                         Flexible(
                           child: Text(
-                            "Près de 5000 ans après avoir été doté des pouvoirs tout puissants des dieux égyptiens – et emprisonné très rapidement après – Black Adam est libéré de sa tombe terrestre, prêt à faire régner sa forme unique de justice dans le monde moderne.",
+                            widget.movieModel.overview.isEmpty
+                                ? "..."
+                                : widget.movieModel.overview,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
