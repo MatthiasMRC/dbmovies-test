@@ -13,21 +13,21 @@ class MovieModel {
 
 // Constructor of the model
   MovieModel(
-    this.id,
-    this.title,
-    this.overview,
-    this.poster_path,
-    this.release_date,
-  );
+      {required this.id,
+      required this.title,
+      required this.overview,
+      this.poster_path,
+      required this.release_date});
 
 // Factory is needed to handle the data reveiced from api service
-  factory MovieModel.fromJson(Map<String, dynamic> map) {
+  factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(
-      map['id'] as int,
-      map['title'] as String,
-      map['overview'] as String,
-      map['poster_path'] != null ? map['poster_path'] as String : null,
-      map['release_date'] as String,
+      id: json['id'] ?? "",
+      title: json['title'] ?? "",
+      overview: json['overview'] ?? "",
+      poster_path:
+          json['poster_path'] != null ? json['poster_path'] as String : null,
+      release_date: json['release_date'] ?? "",
     );
   }
 

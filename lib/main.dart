@@ -14,7 +14,7 @@ void main() {
   //It call MovieProvider which is the only provider use in this application
   //You have to use MultiProvider if you need to use futher provider class
   runApp(ChangeNotifierProvider<MovieProvider>(
-      child: const MyApp(), create: (_) => MovieProvider()));
+      child: const MyApp(), create: (context) => MovieProvider()));
 }
 
 class MyApp extends StatelessWidget {
@@ -27,7 +27,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home:
+          //We can also put the ChangeNotifierProvider here because it's the root of the application too
+          const MyHomePage(),
     );
   }
 }
@@ -42,29 +44,25 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   //index selector
   int currentIndex = 0;
-  //Declaration of movies list
-  List<MovieModel>? movies;
-
-  //Function called at init state to get popular movies handle by api service
-  void getPopularMovies() {
-    ApiService()
-        .getPopularMovies()
-        .then((results) => setState(() => movies = results));
-  }
 
 // Initialization of movies list
   @override
   void initState() {
     super.initState();
-    getPopularMovies();
+    //Declaration of instance of MovieProvider and launch getPostData method
+    final movies = Provider.of<MovieProvider>(context, listen: false);
+    movies.getPostData();
   }
 
   @override
   Widget build(BuildContext context) {
+    //Declaration of MovieModel provider to instance it
+    final movies = Provider.of<MovieProvider>(context);
+
     // list of screens widget
     final screens = <Widget>[
       FilmsScreen(
-        movies: movies,
+        movieProvider: movies,
       ),
       const FavorisScreen()
     ];

@@ -2,11 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:test_technique_flutter/models/movie_model.dart';
+import 'package:test_technique_flutter/providers/movie_provider.dart';
 import 'package:test_technique_flutter/widgets/movie_card.dart';
 
 class FilmsScreen extends StatefulWidget {
-  List<MovieModel>? movies;
-  FilmsScreen({Key? key, this.movies}) : super(key: key);
+  // Injection of the MovieProvider
+  MovieProvider? movieProvider;
+  FilmsScreen({Key? key, this.movieProvider}) : super(key: key);
 
   @override
   State<FilmsScreen> createState() => _FilmsScreenState();
@@ -17,15 +19,15 @@ class _FilmsScreenState extends State<FilmsScreen> {
   Widget build(BuildContext context) {
     // This widget is the first screen called (index 0)
     // This ternary condition check if movie list is null or not and display the right widget according to the application construction
-    return widget.movies == null
+    return widget.movieProvider!.isLoading
         ? const Center(child: CircularProgressIndicator())
         : ListView.builder(
             itemCount: 10,
             itemBuilder: (BuildContext context, int index) {
-              final currentMovie = widget.movies![index];
+              final movieProvider = widget.movieProvider!;
               // Use a widget to display each movies
               return MovieCard(
-                movieModel: currentMovie,
+                movieModel: movieProvider.movies[index]!,
               );
             },
           );
