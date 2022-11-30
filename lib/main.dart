@@ -42,9 +42,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  //index selector
-  int currentIndex = 0;
-
 // Initialization of movies list
   @override
   void initState() {
@@ -57,12 +54,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     //Declaration of MovieModel provider to instance it
-    final movies = Provider.of<MovieProvider>(context);
+    final provider = Provider.of<MovieProvider>(context);
 
     // list of screens widget
     final screens = <Widget>[
       FilmsScreen(
-        movieProvider: movies,
+        movieProvider: provider,
       ),
       const FavorisScreen()
     ];
@@ -73,16 +70,16 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body:
           // the screen to display is dynamic - depending of the currentIndex
-          screens[currentIndex],
+          screens[provider.currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
+        currentIndex: provider.currentIndex,
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.movie), label: "Films"),
           BottomNavigationBarItem(
               icon: Icon(Icons.favorite_outline), label: "Favoris"),
         ],
-        onTap: (index) => setState(() => currentIndex = index),
+        onTap: (index) => provider.setCurrentIndex(index),
       ),
     );
   }

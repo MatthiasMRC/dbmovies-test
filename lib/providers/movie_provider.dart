@@ -4,6 +4,18 @@ import 'package:test_technique_flutter/services/api_service.dart';
 
 //Creation of the class Movie Provider with Change Notifier
 class MovieProvider with ChangeNotifier {
+  // Declaration of private int
+  int _currentIndex = 0;
+
+//Declaration of getter
+  int get currentIndex => _currentIndex;
+
+//Function setter to switch current index
+  void setCurrentIndex(int value) {
+    _currentIndex = value;
+    notifyListeners();
+  }
+
 //Declaration of movies list
   late List<MovieModel?> movies;
 
