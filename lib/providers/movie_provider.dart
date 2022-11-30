@@ -9,11 +9,13 @@ class MovieProvider with ChangeNotifier {
   // Getter movies list
   List<MovieModel> get favouriteMovies => _favouriteMovies;
 
+  // Function to handle add to list item
   void addToList(MovieModel movie) {
     _favouriteMovies.add(movie);
     notifyListeners();
   }
 
+// Function to handle remove to list item
   void removeToList(MovieModel movie) {
     _favouriteMovies.remove(movie);
     notifyListeners();

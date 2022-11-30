@@ -4,7 +4,7 @@ import 'package:test_technique_flutter/providers/movie_provider.dart';
 import 'package:test_technique_flutter/widgets/movie_card.dart';
 
 class FavorisScreen extends StatefulWidget {
-  FavorisScreen({Key? key}) : super(key: key);
+  const FavorisScreen({Key? key}) : super(key: key);
 
   @override
   State<FavorisScreen> createState() => _FavorisScreenState();
@@ -20,7 +20,7 @@ class _FavorisScreenState extends State<FavorisScreen> {
       itemCount: favouriteMovies.length,
       itemBuilder: (BuildContext context, int index) {
         final currentMovie = favouriteMovies[index];
-        // Use a widget to display each movies
+        // Use my own widget "MovieCard" to display each movies
         return MovieCard(
           movieModel: currentMovie,
         );

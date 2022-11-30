@@ -1,8 +1,7 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:test_technique_flutter/models/movie_model.dart';
-import 'package:test_technique_flutter/providers/movie_provider.dart';
-import 'package:test_technique_flutter/services/api_service.dart';
 import 'package:test_technique_flutter/widgets/movie_card.dart';
 
 class FilmsScreen extends StatefulWidget {
@@ -16,6 +15,8 @@ class FilmsScreen extends StatefulWidget {
 class _FilmsScreenState extends State<FilmsScreen> {
   @override
   Widget build(BuildContext context) {
+    // This widget is the first screen called (index 0)
+    // This ternary condition check if movie list is null or not and display the right widget according to the application construction
     return widget.movies == null
         ? const Center(child: CircularProgressIndicator())
         : ListView.builder(

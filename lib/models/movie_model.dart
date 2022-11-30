@@ -1,9 +1,8 @@
-import 'dart:convert';
+// ignore_for_file: non_constant_identifier_names
 
 import 'package:test_technique_flutter/services/api.dart';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-// Model of Movie
+// Class model of Movie
 
 class MovieModel {
   final int id;
@@ -12,7 +11,7 @@ class MovieModel {
   final String? poster_path;
   final String release_date;
 
-// Constructor
+// Constructor of the model
   MovieModel(
     this.id,
     this.title,
@@ -21,33 +20,7 @@ class MovieModel {
     this.release_date,
   );
 
-  MovieModel copyWith({
-    int? id,
-    String? title,
-    String? overview,
-    String? poster_path,
-    String? release_date,
-  }) {
-    return MovieModel(
-      id ?? this.id,
-      title ?? this.title,
-      overview ?? this.overview,
-      poster_path ?? this.poster_path,
-      release_date ?? this.release_date,
-    );
-  }
-
-// Function to resgiter to favourite
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'title': title,
-      'overview': overview,
-      'poster_path': poster_path,
-      'release_date': release_date,
-    };
-  }
-
+// Factory is needed to handle the data reveiced from api service
   factory MovieModel.fromJson(Map<String, dynamic> map) {
     return MovieModel(
       map['id'] as int,

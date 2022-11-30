@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:test_technique_flutter/services/api_key.dart';
 
 // Api class which contain all of base url

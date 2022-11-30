@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 class ApiKey {
   // API key provided from TMDB
   // Must not be visible in public. We can call a cloud function request to get this key for Flutter Mobile.
