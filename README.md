@@ -1,16 +1,21 @@
-# test_technique_flutter
+# Flutter test - TMDB
 
-A new Flutter project.
+This application works on iOS and Android.
 
-## Getting Started
+## Development environment
+**iOS :**
+Iphone 12 Pro Max simulator *(version: 15.2)* 
 
-This project is a starting point for a Flutter application.
+**Android :**
+Pixel 5 simulator *(version: API 30)* 
 
-A few resources to get you started if this is your first Flutter project:
+## Documentation
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+**Framework :** Flutter
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Details packages :**
+- [dio](https://pub.dev/packages/dio) handle http request (REST API)
+- [intl](https://pub.dev/packages/intl) string manipulation (format date)
+- [provider](https://pub.dev/packages/provider) State Management
+
+
