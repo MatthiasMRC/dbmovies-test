@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:test_technique_flutter/models/movie_model.dart';
 import 'package:test_technique_flutter/providers/movie_provider.dart';
 import 'package:test_technique_flutter/screens/favoris_screen.dart';
 import 'package:test_technique_flutter/screens/films_screen.dart';
-import 'package:test_technique_flutter/services/api_service.dart';
 
 //Provider is use in this application for the state management
 //To get more information about this package : https://pub.dev/packages/provider
